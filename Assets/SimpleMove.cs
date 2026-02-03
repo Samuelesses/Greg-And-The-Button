@@ -4,13 +4,14 @@ public class SimpleMove : MonoBehaviour
 {
     public float speed = 5f;
     public float mouseSensitivity = 2f;
+    public bool movementEnabled = false;
     
-    private CharacterController controller;
+    private Rigidbody rb;
     private Transform cameraTransform;
     private float verticalRotation = 0f;
 
     void Start() {
-        controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
 
         cameraTransform = GetComponentInChildren<Camera>().transform;
         
@@ -21,7 +22,11 @@ public class SimpleMove : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         Vector3 move = transform.right * x + transform.forward * z;
-        controller.Move(move * speed * Time.deltaTime);
+        
+        if (movementEnabled)
+        {
+            rb.linearVelocity = new Vector3(move.x * speed, rb.linearVelocity.y, move.z * speed);
+        }
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;

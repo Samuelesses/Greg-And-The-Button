@@ -5,6 +5,7 @@ using TMPro;
 public class SequenceManager : MonoBehaviour
 {
     public TextMeshProUGUI Subtitle;
+    public GameObject Player;
     public AudioSource audio1;
     public AudioSource audio2;
     public GameObject MicWarning;
@@ -15,6 +16,11 @@ public class SequenceManager : MonoBehaviour
     public GameObject MainLight;
     public AudioSource audio7;
     public AudioSource audio8;
+    public GameObject GreenButton;
+    public AudioSource audio9;
+    public AudioSource audio10;
+    public GameObject MainButton;
+    public AudioSource audio11;
 
     void Start()
     {
@@ -63,7 +69,38 @@ public class SequenceManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         audio8.Play();
         Subtitle.text = "And if you are... You are impatient. And need to wait longer.";
+
         yield return new WaitForSeconds(5f);
         Subtitle.text = "Press the green button if you were wondering that, no lies.";
+        GreenButton.SetActive(true);
+
+        yield return new WaitForSeconds(6f);
+        GreenButton.SetActive(false);
+
+        yield return new WaitForSeconds(4f);
+        audio9.Play();
+        Subtitle.text = "Okay great, lets get your legs moving!";
+
+        yield return new WaitForSeconds(3f);
+        Player.GetComponent<SimpleMove>().movementEnabled = true;
+
+        yield return new WaitUntil(() => Mathf.Abs(Player.transform.position.z - 12.32f) > 0.1f);
+
+        yield return new WaitForSeconds(3f);
+        audio10.Play();
+        Subtitle.text = "Nice work, now here is your first button, it works like any other button would,";
+        MainButton.SetActive(true);
+
+        yield return new WaitForSeconds(6f);
+        Subtitle.text = "but upon finidng, you move onto the next level. Find all buttons to win!";
+        
+        yield return new WaitForSeconds(6f);
+
+        Subtitle.text = "Simple Enough?";
+
+        yield return new WaitForSeconds(3f);
+        audio11.Play();
+        Subtitle.text = "Now press the button when you're ready!";
+
     }
 }
