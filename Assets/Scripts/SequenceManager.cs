@@ -1,11 +1,15 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SequenceManager : MonoBehaviour
 {
     public TextMeshProUGUI Subtitle;
     public GameObject Player;
+    public GameObject wasd;
+    public AudioSource wasdsound;
+
     public AudioSource audio1;
     public AudioSource audio2;
     public GameObject MicWarning;
@@ -21,6 +25,8 @@ public class SequenceManager : MonoBehaviour
     public AudioSource audio10;
     public GameObject MainButton;
     public AudioSource audio11;
+
+    private bool greenButtonPressed = false;
 
     void Start()
     {
@@ -74,19 +80,29 @@ public class SequenceManager : MonoBehaviour
         Subtitle.text = "Press the green button if you were wondering that, no lies.";
         GreenButton.SetActive(true);
 
-        yield return new WaitForSeconds(6f);
-        GreenButton.SetActive(false);
+        yield return new WaitForSeconds(7f);
 
-        yield return new WaitForSeconds(4f);
+        if (greenButtonPressed)
+        {
+            audio1.Play();
+            Subtitle.text = "I KNEW you were impatient! But that's okay.";
+            yield return new WaitForSeconds(10f);
+        }
+
         audio9.Play();
         Subtitle.text = "Okay great, lets get your legs moving!";
-
+        
+        GreenButton.SetActive(false);
         yield return new WaitForSeconds(3f);
         Player.GetComponent<SimpleMove>().movementEnabled = true;
+        wasd.SetActive(true);
+        wasdsound.Play();
+        
 
         yield return new WaitUntil(() => Mathf.Abs(Player.transform.position.z - 12.32f) > 0.1f);
 
         yield return new WaitForSeconds(3f);
+        wasd.SetActive(false);
         audio10.Play();
         Subtitle.text = "Nice work, now here is your first button, it works like any other button would,";
         MainButton.SetActive(true);
@@ -102,5 +118,16 @@ public class SequenceManager : MonoBehaviour
         audio11.Play();
         Subtitle.text = "Now press the button when you're ready!";
 
+    }
+
+    public void OnGreenButtonPressed()
+    {
+        greenButtonPressed = true;
+    }
+
+    public void OnRedButtonPressed()
+    {
+        greenButtonPressed = true;
+        SceneManager.LoadScene("Level 2");
     }
 }

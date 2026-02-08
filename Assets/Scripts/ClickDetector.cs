@@ -22,6 +22,7 @@ public class ClickDetector : MonoBehaviour
             if (Physics.Raycast(ray, out hit, interactDistance, interactLayer))
             {
                 hit.collider.SendMessage("OnClicked", SendMessageOptions.DontRequireReceiver);
+                
             }
         }
     }
