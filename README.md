@@ -1,5 +1,5 @@
 ## DEMO NOTE
-This is a DEMO, many voice lines are currently in production and will be missing, instead, a few will ONLY be shown as subtitles.
+This is a DEMO, many voice lines are currently in production and will be missing, instead, a few will ONLY be shown as subtitles. In addition, levels are missing, and the secret endings are not included.
 
 # Greg And The Button
 You play as Greg, the protagonist, guided by a narrorator.
