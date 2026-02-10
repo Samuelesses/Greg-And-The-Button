@@ -27,6 +27,9 @@ public class SequenceManager : MonoBehaviour
     public AudioSource audio11;
 
     private bool greenButtonPressed = false;
+    private bool readyForMainButton = false;
+    private bool altScene = false;
+    private bool playingAltScene = false;
 
     void Start()
     {
@@ -116,6 +119,7 @@ public class SequenceManager : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         audio11.Play();
+        readyForMainButton = true;
         Subtitle.text = "Now press the button when you're ready!";
 
     }
@@ -129,5 +133,34 @@ public class SequenceManager : MonoBehaviour
     {
         greenButtonPressed = true;
         SceneManager.LoadScene("Level 2");
+    }
+
+    public void OnMainButtonPressed()
+    {
+        if (playingAltScene)
+        {
+            return;
+        }
+
+        if (!readyForMainButton && !altScene)
+        {
+            StartCoroutine(PlayAltScene());
+        }
+        else if (readyForMainButton || altScene)
+        {
+            SceneManager.LoadScene("Level 2");
+        }
+    }
+
+    IEnumerator PlayAltScene()
+    {
+        altScene = true;
+        playingAltScene = true;
+        audio1.Play();
+        Subtitle.text = "I said when you're READY!";
+        
+        yield return new WaitForSeconds(3f);
+        
+        playingAltScene = false;
     }
 }
