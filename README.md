@@ -14,6 +14,10 @@ The Stanly Parable was a big insperation for this project, it guided the idea th
 2. 'The Found Legs' (Requires 'The Leg Ending' Unlocked)
 3. 'The Real Ending' - Complete the game normally!
 
+## ​All endings playthrough: (SPOILERS)
+
+https://www.youtube.com/watch?v=qYdp9tFQbDE
+
 ## DEMO NOTE
 This is unfinished, and I reccomend when playing though, you attempt all endings for the full experince. For the 'Real ending' there is only 3 levels for now.
 
